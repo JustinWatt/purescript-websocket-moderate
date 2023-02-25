@@ -17,13 +17,14 @@ module WebSocket
 
 import Prelude ((*>), Unit, class Applicative, (<<<), pure, unit, ($), class Semigroup, class Monoid, mempty, (>>=), class Bind)
 import Data.Argonaut (class DecodeJson, class EncodeJson, Json, decodeJson, encodeJson, jsonParser, printJsonDecodeError, stringify)
+import Type.Proxy (Proxy(..))
 import Data.ArrayBuffer.Types (ArrayBuffer)
 import Data.Either (Either(..))
 import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe, toNullable)
 import Data.Profunctor (class Profunctor)
-import Data.Symbol (SProxy(..), reflectSymbol, class IsSymbol)
+import Data.Symbol (reflectSymbol, class IsSymbol)
 import Effect (Effect)
 import Effect.Class (class MonadEffect, liftEffect)
 import Effect.Exception (Error, throw)
@@ -216,7 +217,7 @@ newWebSocketBoth url protocols (WebSocketsApp continue) (WebSocketsApp continueB
   runEffectFn1 newWebSocketImpl
     { url
     , protocols
-    , binaryType: reflectSymbol (SProxy :: SProxy binaryType)
+    , binaryType: reflectSymbol (Proxy :: Proxy binaryType)
     , continue: \env ->
         let conts = continue env
         in  { onclose: mkEffectFn1 $ \{code,reason,wasClean} -> conts.onclose

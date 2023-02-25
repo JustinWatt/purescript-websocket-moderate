@@ -1,11 +1,9 @@
-"use strict";
-
 var platformSpecificWS = typeof module !== "undefined" && module.require
       ? module.require('ws')
       : WebSocket;
 
 
-exports.newWebSocketImpl = function runNewWebSocketImpl (params) {
+export function newWebSocketImpl (params) {
     var socket = new platformSpecificWS(params.url, params.protocols);
     socket.binaryType = params.binaryType;
     var cont = params.continue({ url : socket.url, protocol : socket.protocol });
@@ -56,14 +54,13 @@ function isBinaryImpl (f) {
     return function isBinaryImpl_ (d) {
         return d instanceof f;
     };
-};
+}
+export const isBinaryArrayBufferImpl = isBinaryImpl(ArrayBuffer);
 
-
-exports.isBinaryArrayBufferImpl = isBinaryImpl(ArrayBuffer);
-exports.isBinaryBlobImpl = function(d) {
+export function isBinaryBlobImpl(d) {
     if(typeof Blob !== 'undefined') {
         return isBinaryImpl(Blob)(d);
     } else {
         return false;
     }
-};
+}
