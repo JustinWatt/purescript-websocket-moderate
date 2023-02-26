@@ -17,7 +17,6 @@ module WebSocket
 
 import Prelude ((*>), Unit, class Applicative, (<<<), pure, unit, ($), class Semigroup, class Monoid, mempty, (>>=), class Bind)
 import Data.Argonaut (class DecodeJson, class EncodeJson, Json, decodeJson, encodeJson, jsonParser, printJsonDecodeError, stringify)
-import Type.Proxy (Proxy(..))
 import Data.ArrayBuffer.Types (ArrayBuffer)
 import Data.Either (Either(..))
 import Data.Generic.Rep (class Generic)
@@ -296,6 +295,7 @@ instance binaryTypeArrayBuffer :: BinaryType ArrayBuffer "arraybuffer"
 instance binaryTypeBlob :: BinaryType Blob "blob"
 
 
+class WebSocketBinary :: forall k. k -> Constraint
 class WebSocketBinary a where
   isBinary :: Proxy a -> Foreign -> Boolean
 
