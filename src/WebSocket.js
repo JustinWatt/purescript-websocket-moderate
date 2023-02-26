@@ -1,7 +1,4 @@
-var platformSpecificWS = typeof module !== "undefined" && module.require
-      ? module.require('ws')
-      : WebSocket;
-
+const platformSpecificWS = WebSocket;
 
 export function newWebSocketImpl (params) {
     var socket = new platformSpecificWS(params.url, params.protocols);
@@ -27,7 +24,6 @@ export function newWebSocketImpl (params) {
             reason: e.reason,
             wasClean: e.wasClean
         });
-        socket.close(e);
     });
 
     socket.addEventListener("error", function(e) {
