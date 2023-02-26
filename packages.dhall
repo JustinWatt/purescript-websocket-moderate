@@ -116,24 +116,24 @@ let additions =
   }
 -------------------------------
 -}
-
-
 let upstream =
-      https://github.com/purescript/package-sets/releases/download/psc-0.13.6-20200423/packages.dhall sha256:c180a06bb5444fd950f8cbdd6605c644fd246deb397e62572b8f4a6b9dbcaf22
+      https://github.com/purescript/package-sets/releases/download/psc-0.15.7-20230209/packages.dhall
+        sha256:32885192e68e912d3370525efe51dbeb75383caf893775b81ef4fdfbfc274f82
 
-let overrides = 
-  { argonaut = upstream.argonaut // { version = "v7.0.0" }
-  , argonaut-codecs = upstream.argonaut-codecs // { version = "v7.0.0" }
-  , argonaut-traversals = upstream.argonaut-traversals // { version = "v8.0.0" }
-  }
+let overrides = {=}
 
 let additions =
-  { text-encoding =
-    { dependencies =
-      [ "arraybuffer-types", "either", "exceptions", "functions", "strings" ]
-    , repo = "https://github.com/AlexaDeWit/purescript-text-encoding.git"
-    , version = "v1.0.0"
-    }
-  }
+      { text-encoding =
+        { repo = "https://github.com/JustinWatt/purescript-text-encoding.git"
+        , version = "6d5e4af9a04dd2b0228e6a951aad239eddf87eff"
+        , dependencies =
+          [ "arraybuffer-types"
+          , "either"
+          , "exceptions"
+          , "functions"
+          , "prelude"
+          ]
+        }
+      }
 
 in  upstream // overrides // additions

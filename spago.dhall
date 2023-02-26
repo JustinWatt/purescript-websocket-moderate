@@ -6,9 +6,16 @@ You can edit this file as you like.
 , dependencies =
   [ "argonaut"
   , "arraybuffer"
+  , "arraybuffer-types"
+  , "effect"
+  , "either"
   , "exceptions"
+  , "foreign"
+  , "maybe"
   , "monad-control"
   , "nullable"
+  , "prelude"
+  , "profunctor"
   , "text-encoding"
   , "web-file"
   ]
